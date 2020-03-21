@@ -1,0 +1,13 @@
+In PS console in visual studio code
+py -3 -m venv .venv
+
+##python -m pip install lxml
+##python -m pip install requests
+
+
+pip install selenium
+python -m pip install beautifulsoup4
+
+Install chromedriver
+Add chromedriver to PATH environment variable
+
