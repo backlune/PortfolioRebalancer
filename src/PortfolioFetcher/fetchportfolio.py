@@ -33,7 +33,7 @@ def main(argv):
    assets = nordnet.parse_portfolio(page)
 
    print('Done')
-   print('found ' + assets.length)
+   print('found ' + len(assets))
 
 if __name__ == '__main__':
     main(sys.argv[1:])
