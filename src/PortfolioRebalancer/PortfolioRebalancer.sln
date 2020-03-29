@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortfolioRebalancer", "PortfolioRebalancer\PortfolioRebalancer.csproj", "{D32C5AFD-808B-4EA3-91E2-E91E15DB8621}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioRebalancer.Console", "PortfolioRebalancer.Console\PortfolioRebalancer.Console.csproj", "{4F6F6517-381B-43F0-97A3-BAFE1F5E1C3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortfolioRebalancer.Console", "PortfolioRebalancer.Console\PortfolioRebalancer.Console.csproj", "{4F6F6517-381B-43F0-97A3-BAFE1F5E1C3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioRebalancer.App", "PortfolioRebalancer.App\PortfolioRebalancer.App.csproj", "{21CBC6C4-9FD9-48E3-90F0-744964102F0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,22 @@ Global
 		{4F6F6517-381B-43F0-97A3-BAFE1F5E1C3B}.Release|x64.Build.0 = Release|Any CPU
 		{4F6F6517-381B-43F0-97A3-BAFE1F5E1C3B}.Release|x86.ActiveCfg = Release|Any CPU
 		{4F6F6517-381B-43F0-97A3-BAFE1F5E1C3B}.Release|x86.Build.0 = Release|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Debug|x64.Build.0 = Debug|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Debug|x86.Build.0 = Debug|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Release|ARM.Build.0 = Release|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Release|x64.ActiveCfg = Release|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Release|x64.Build.0 = Release|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Release|x86.ActiveCfg = Release|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
