@@ -14,12 +14,22 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaResource Remove="Views\PortfolioView.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\PortfolioView.xaml" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.0" />
     <PackageReference Include="Avalonia.Desktop" Version="0.9.0" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.0" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Views\PortfolioView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\PortfolioRebalancer\PortfolioRebalancer.csproj" />
-    <ProjectReference Include="..\..\..\external\oxyplot\Source\OxyPlot.Avalonia\OxyPlot.Avalonia.csproj" />
   </ItemGroup>
 </Project>

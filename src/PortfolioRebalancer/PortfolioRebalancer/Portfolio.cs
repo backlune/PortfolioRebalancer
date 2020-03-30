@@ -6,6 +6,6 @@ namespace PortfolioRebalancer
     public class Portfolio
     {
         public string Id { get; set; }
-        public List<Asset> Assets { get; set; }
+        public List<PortfolioAsset> Assets { get; set; }
     }
 }
