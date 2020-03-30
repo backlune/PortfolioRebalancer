@@ -20,7 +20,7 @@
     </Grid.RowDefinitions>
 
     <StackPanel Grid.Row="0" Margin="5">
-      <Button Height="30" Width="60" HorizontalAlignment="Right">Import</Button>
+      <Button Command="{Binding ImportPortfolio}" Height="30" Width="60" HorizontalAlignment="Right">Import</Button>
     </StackPanel>
     
     <StackPanel Grid.Row="1" Margin="5">
