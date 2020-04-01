@@ -1,46 +1,51 @@
 ﻿using PortfolioRebalancer.App.Services;
+using ReactiveUI;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace PortfolioRebalancer.App.ViewModels
 {
-	public class PortfolioViewModel : ViewModelBase
-	{
-		private Database db;
-		private Portfolio Portfolio;
+    public class PortfolioViewModel : ViewModelBase
+    {
+        private Database db;
+        private Portfolio Portfolio;
 
-		public PortfolioViewModel(Database db, Portfolio item)
-		{
-			this.db = db;
-			this.Portfolio = item;
-		}
+        public PortfolioViewModel(Database db, Portfolio item)
+        {
+            this.db = db;
+            this.Portfolio = item;
+            Assets = new ObservableCollection<PortfolioAssetViewModel>(item.Assets.Select(PortfolioAssetViewModel.FromAsset));
+            foreach (var asset in Assets)
+            {
+                // TODO EB (2020-04-01): Events should be unsubscribed
+                asset.PropertyChanged += (s, e) => this.RaisePropertyChanged(nameof(AssetsByTag));
+            }
+        }
 
-		public string Id
-		{
-			get => this.Portfolio.Id;
-			set
-			{
-				if (this.Portfolio.Id == value)
-				{
-					return;
-				}
+        private ObservableCollection<PortfolioAssetViewModel> assets;
 
-				this.Portfolio.Id = value;
-			}
-		}
+        public ObservableCollection<PortfolioAssetViewModel> Assets
+        {
+            get => this.assets;
+            private set
+            {
+                this.RaiseAndSetIfChanged(ref this.assets, value);
+                this.RaisePropertyChanged(nameof(AssetsByTag));
+            }
+        }
 
-		public List<PortfolioAsset> Assets
-		{
-			get => this.Portfolio.Assets;
-			set
-			{
-				if (this.Portfolio.Assets == value)
-				{
-					return;
-				}
-
-				this.Portfolio.Assets = value;
-			}
-		}
-	}
+        public ObservableCollection<TagAssetGroup> AssetsByTag
+        {
+            get
+            {
+                var tagGroups = this.assets.Select(x => new { Tag = x.Tag, Value = x.ValueDomesticCurrency }).GroupBy(x => x.Tag).Select(x => new TagAssetGroup
+                {
+                    Tag = x.Key,
+                    Value = x.Sum(y => y.Value)
+                });
+                return new ObservableCollection<TagAssetGroup>(tagGroups);
+            }
+        }
+    }
 }

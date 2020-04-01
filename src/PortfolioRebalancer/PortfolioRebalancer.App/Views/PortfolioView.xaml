@@ -2,15 +2,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:oxy="clr-namespace:OxyPlot.Avalonia;assembly=OxyPlot.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="PortfolioRebalancer.App.Views.PortfolioView">
-  <ListBox Items="{Binding Assets}">
-    <ListBox.ItemTemplate>
-      <DataTemplate>
-        <StackPanel Orientation="Horizontal">
-          <TextBox Text="{Binding Name}"/>
-        </StackPanel>
-      </DataTemplate>
-    </ListBox.ItemTemplate>
-  </ListBox>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="0.3*" />
+      <RowDefinition Height="0.7*" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="0.5*" />
+      <ColumnDefinition Width="0.5*" />
+    </Grid.ColumnDefinitions>
+ 
+  
+    <oxy:Plot Grid.Row="0" Grid.Column="0" Title="Asset balance" Width="400" Height="300" >
+      <oxy:Plot.Series>
+        <oxy:PieSeries 
+            InnerDiameter="0.2"
+            ExplodedDistance="0"
+            Stroke="Black" StrokeThickness="1"
+            StartAngle="0" AngleSpan="360"
+            Items="{Binding Assets}"
+            LabelField="Name" ValueField="ValueDomesticCurrency"  />
+      </oxy:Plot.Series>
+    </oxy:Plot>
+
+    <oxy:Plot Grid.Row="0" Grid.Column="1" Title="Tag balance" Width="400" Height="300" >
+      <oxy:Plot.Series>
+        <oxy:PieSeries
+            InnerDiameter="0.2"
+            ExplodedDistance="0"
+            Stroke="Black" StrokeThickness="1"
+            StartAngle="0" AngleSpan="360"
+            Items="{Binding AssetsByTag, Mode=TwoWay}"
+            LabelField="Tag" ValueField="Value" />
+      </oxy:Plot.Series>
+    </oxy:Plot>
+  
+    <ListBox Grid.Row="1" Grid.ColumnSpan="2" Items="{Binding Assets}">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding Name}"/>
+            <TextBox Text="{Binding Tag, Mode=TwoWay}" />
+          </StackPanel>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+  </Grid>
 </UserControl>
