@@ -9,5 +9,14 @@ current balance.
 Supports Scandinavian online bank **Nordnet** but will be built so that it can be extended to other banks.
 
 ## Code structure
-- Portfolio fetching using python (deoends on selenium and chromedriver)
+- Portfolio fetching using python (depends on selenium and chromedriver)
 - Reporting data using .Net Core and C# with app built for Mac and Windows
+
+## Dependecies
+- Python 3.7
+  - Selenium
+  - BeautifulSoup
+- .Net Core 3.1
+- Pythonnet
+- Avalonia
+- Avalonia/oxy-plot

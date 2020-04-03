@@ -5,7 +5,13 @@ VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortfolioRebalancer", "PortfolioRebalancer\PortfolioRebalancer.csproj", "{D32C5AFD-808B-4EA3-91E2-E91E15DB8621}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioRebalancer.Console", "PortfolioRebalancer.Console\PortfolioRebalancer.Console.csproj", "{4F6F6517-381B-43F0-97A3-BAFE1F5E1C3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortfolioRebalancer.Console", "PortfolioRebalancer.Console\PortfolioRebalancer.Console.csproj", "{4F6F6517-381B-43F0-97A3-BAFE1F5E1C3B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortfolioRebalancer.App", "PortfolioRebalancer.App\PortfolioRebalancer.App.csproj", "{21CBC6C4-9FD9-48E3-90F0-744964102F0B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{426AE4A2-266C-42BB-A48E-2E43F7CCAD68}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OxyPlot.Avalonia", "..\..\external\oxyplot\Source\OxyPlot.Avalonia\OxyPlot.Avalonia.csproj", "{DC6993C5-98FF-4F22-BD15-3025D08DF353}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,9 +57,44 @@ Global
 		{4F6F6517-381B-43F0-97A3-BAFE1F5E1C3B}.Release|x64.Build.0 = Release|Any CPU
 		{4F6F6517-381B-43F0-97A3-BAFE1F5E1C3B}.Release|x86.ActiveCfg = Release|Any CPU
 		{4F6F6517-381B-43F0-97A3-BAFE1F5E1C3B}.Release|x86.Build.0 = Release|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Debug|x64.Build.0 = Debug|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Debug|x86.Build.0 = Debug|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Release|ARM.Build.0 = Release|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Release|x64.ActiveCfg = Release|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Release|x64.Build.0 = Release|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Release|x86.ActiveCfg = Release|Any CPU
+		{21CBC6C4-9FD9-48E3-90F0-744964102F0B}.Release|x86.Build.0 = Release|Any CPU
+		{DC6993C5-98FF-4F22-BD15-3025D08DF353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC6993C5-98FF-4F22-BD15-3025D08DF353}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC6993C5-98FF-4F22-BD15-3025D08DF353}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{DC6993C5-98FF-4F22-BD15-3025D08DF353}.Debug|ARM.Build.0 = Debug|Any CPU
+		{DC6993C5-98FF-4F22-BD15-3025D08DF353}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DC6993C5-98FF-4F22-BD15-3025D08DF353}.Debug|x64.Build.0 = Debug|Any CPU
+		{DC6993C5-98FF-4F22-BD15-3025D08DF353}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DC6993C5-98FF-4F22-BD15-3025D08DF353}.Debug|x86.Build.0 = Debug|Any CPU
+		{DC6993C5-98FF-4F22-BD15-3025D08DF353}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC6993C5-98FF-4F22-BD15-3025D08DF353}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC6993C5-98FF-4F22-BD15-3025D08DF353}.Release|ARM.ActiveCfg = Release|Any CPU
+		{DC6993C5-98FF-4F22-BD15-3025D08DF353}.Release|ARM.Build.0 = Release|Any CPU
+		{DC6993C5-98FF-4F22-BD15-3025D08DF353}.Release|x64.ActiveCfg = Release|Any CPU
+		{DC6993C5-98FF-4F22-BD15-3025D08DF353}.Release|x64.Build.0 = Release|Any CPU
+		{DC6993C5-98FF-4F22-BD15-3025D08DF353}.Release|x86.ActiveCfg = Release|Any CPU
+		{DC6993C5-98FF-4F22-BD15-3025D08DF353}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DC6993C5-98FF-4F22-BD15-3025D08DF353} = {426AE4A2-266C-42BB-A48E-2E43F7CCAD68}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {980679DF-7797-4883-A568-8236ADCADA6F}
