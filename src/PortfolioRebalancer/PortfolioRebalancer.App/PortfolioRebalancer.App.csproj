@@ -31,11 +31,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\external\oxyplot\Source\OxyPlot.Avalonia\OxyPlot.Avalonia.csproj" />
     <ProjectReference Include="..\PortfolioRebalancer\PortfolioRebalancer.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="OxyPlot.Avalonia">
-      <HintPath>..\..\..\external\oxyplot\Source\OxyPlot.Avalonia\bin\Debug\netstandard2.0\OxyPlot.Avalonia.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>
