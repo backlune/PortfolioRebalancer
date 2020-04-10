@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
+import unicodedata
 # from portfolioModels import Asset
 
 
@@ -53,20 +54,20 @@ def parse_portfolio(page):
     
     assets = [];
 
-    _, *stockTraded = soup.select('.c02256.c02278') # classes of the tr in the table
+    stockTraded = soup.select('.c02255.c02277') # classes of the tr in the table
     for stock in stockTraded:
-        name = stock.select_one('td:nth-of-type(2)').select_one('span.c02284')
-        units = stock.select_one('td:nth-of-type(3)').select_one('div.c02265')
-        unitPrice = stock.select_one('td:nth-of-type(6)').select_one('div.c02265')
-        valueSEK = stock.select_one('td:nth-of-type(11)').select_one('div.c02265')
-        assets.append(Asset(name.attrs['title'], units.text, unitPrice.text, valueSEK.text))
+        name = stock.select_one('td:nth-of-type(2)').select_one('span.c02283')
+        units = stock.select_one('td:nth-of-type(3)').select_one('div.c02264')
+        unitPrice = stock.select_one('td:nth-of-type(6)').select_one('div.c02264')
+        valueSEK = stock.select_one('td:nth-of-type(12)').select_one('div.c02264')
+        assets.append(Asset(name.attrs['title'], units.text, unitPrice.text, unicodedata.normalize('NFKC', valueSEK.text)))
 
-    _, *funds = soup.select('.c02256.c02307')  # classes of the tr in the table
+    funds = soup.select('.c02255.c02306')  # classes of the tr in the table
     for fund in funds:
         name = fund.select_one('td:nth-of-type(2)').select_one('span.c02314')
-        units = fund.select_one('td:nth-of-type(3)').select_one('div.c02265')
-        unitPrice = fund.select_one('td:nth-of-type(8)').select_one('div.c02265')
-        valueSEK = fund.select_one('td:nth-of-type(11)').select_one('div.c02265')
-        assets.append(Asset(name.attrs['title'], units.text, unitPrice.text, valueSEK.text))
+        units = fund.select_one('td:nth-of-type(3)').select_one('div.c02264')
+        unitPrice = fund.select_one('td:nth-of-type(8)').select_one('div.c02264')
+        valueSEK = fund.select_one('td:nth-of-type(12)').select_one('div.c02264')
+        assets.append(Asset(name.attrs['title'], units.text, unitPrice.text, unicodedata.normalize('NFKC', valueSEK.text)))
         
     return assets
