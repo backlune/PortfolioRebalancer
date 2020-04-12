@@ -1,7 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -12,6 +18,7 @@
       <SubType>Designer</SubType>
     </AvaloniaResource>
     <AvaloniaResource Include="Assets\**" />
+    <Folder Include="python_modules\" />
   </ItemGroup>
   <ItemGroup>
     <AvaloniaResource Remove="Views\PortfolioView.xaml" />
@@ -23,12 +30,29 @@
     <PackageReference Include="Avalonia" Version="0.9.3" />
     <PackageReference Include="Avalonia.Desktop" Version="0.9.3" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.3" />
+    <PackageReference Include="LiteDB" Version="5.0.5" />
     <PackageReference Include="OxyPlot.Core" Version="2.0.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Python.Runtime.NETStandard" Version="3.7.1" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\PortfolioView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\PortfolioFetcher\chromedriver_win32.exe" Link="python_modules\chromedriver_win32.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\PortfolioFetcher\fetchportfolio.py" Link="python_modules\fetchportfolio.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\PortfolioFetcher\nordnet.py" Link="python_modules\nordnet.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\PortfolioFetcher\portfolioModels.py" Link="python_modules\portfolioModels.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\external\oxyplot\Source\OxyPlot.Avalonia\OxyPlot.Avalonia.csproj" />

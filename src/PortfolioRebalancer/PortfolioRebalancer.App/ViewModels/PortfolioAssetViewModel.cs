@@ -1,4 +1,7 @@
 ﻿using ReactiveUI;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace PortfolioRebalancer.App.ViewModels
 {
@@ -40,6 +43,20 @@ namespace PortfolioRebalancer.App.ViewModels
         {
             get => this.valueDomesticCurrency;
             private set => this.RaiseAndSetIfChanged(ref this.valueDomesticCurrency, value);
+        }
+    }
+
+    public static class PortfolioAssetViewModelExtenstions
+    {
+        public static List<PortfolioAsset> ToEntities(this ObservableCollection<PortfolioAssetViewModel> assets)
+        {
+            return assets.Select(x => new PortfolioAsset
+                {
+                    Name = x.Name,
+                    Tag = x.Tag,
+                    ValueDomesticCurrency = x.ValueDomesticCurrency
+                    // TODO EB (2020-04-12): Loosing some information on the entity here
+                }).ToList();
         }
     }
 }
