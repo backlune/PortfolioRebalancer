@@ -1,7 +1,6 @@
 ﻿using PortfolioRebalancer.App.Services;
 using ReactiveUI;
 using System;
-using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace PortfolioRebalancer.App.ViewModels
@@ -13,6 +12,7 @@ namespace PortfolioRebalancer.App.ViewModels
 		public MainWindowViewModel(Database db)
 		{
 			this.db = db;
+			Content = new PortfolioViewModel(db, "2");
 			ImportPortfolio = ReactiveCommand.Create(OnImportPortfolio);
 		}
 
@@ -31,7 +31,7 @@ namespace PortfolioRebalancer.App.ViewModels
 		private void OnImportPortfolio()
 		{
 			var item = PortfolioImportService.Import("Enter you ssn", 2);
-			this.db.Portfolios.Add(item);
+			this.db.Portfolios.Insert(item);
 			Content = new PortfolioViewModel(this.db, item);
 		}
 	}

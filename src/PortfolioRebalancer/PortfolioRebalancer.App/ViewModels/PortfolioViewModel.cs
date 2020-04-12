@@ -3,6 +3,7 @@ using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 
 namespace PortfolioRebalancer.App.ViewModels
 {
@@ -11,17 +12,31 @@ namespace PortfolioRebalancer.App.ViewModels
         private Database db;
         private Portfolio Portfolio;
 
+        public PortfolioViewModel(Database db, string id)
+        {
+            var item = db.Portfolios.FindOne(x => x.Id == id);
+            Initialize(db, item);
+        }
+
         public PortfolioViewModel(Database db, Portfolio item)
+        {
+            Initialize(db, item);
+        }
+
+        private void Initialize(Database db, Portfolio item)
         {
             this.db = db;
             this.Portfolio = item;
             Assets = new ObservableCollection<PortfolioAssetViewModel>(item.Assets.Select(PortfolioAssetViewModel.FromAsset));
             foreach (var asset in Assets)
             {
-                // TODO EB (2020-04-01): Events should be unsubscribed
                 asset.PropertyChanged += (s, e) => this.RaisePropertyChanged(nameof(AssetsByTag));
             }
+
+            SavePortfolioCommand = ReactiveCommand.Create(OnSavePortfolio);
         }
+
+        public ICommand SavePortfolioCommand { get; set; }
 
         private ObservableCollection<PortfolioAssetViewModel> assets;
 
@@ -46,6 +61,12 @@ namespace PortfolioRebalancer.App.ViewModels
                 });
                 return new ObservableCollection<TagAssetGroup>(tagGroups);
             }
+        }
+
+        private void OnSavePortfolio()
+        {
+            this.Portfolio.Assets = Assets.ToEntities();
+            this.db.Portfolios.Update(this.Portfolio);
         }
     }
 }

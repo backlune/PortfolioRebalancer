@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Python.Runtime;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using Python.Runtime;
 
 namespace PortfolioRebalancer.App.Services
 {
     class PortfolioImportService
-    { 
+    {
         public static Portfolio Import(string ssn, int portfolioId)
         {
             using (Py.GIL())
@@ -23,6 +22,7 @@ namespace PortfolioRebalancer.App.Services
                 return p;
             }
         }
+
         static List<PortfolioAsset> Convert(dynamic py_assets)
         {
             var assets = new List<PortfolioAsset>();
@@ -33,6 +33,4 @@ namespace PortfolioRebalancer.App.Services
             return assets;
         }
     }
-
-
 }

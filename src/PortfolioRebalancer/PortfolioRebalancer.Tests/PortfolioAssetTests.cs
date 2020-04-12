@@ -7,6 +7,17 @@ namespace PortfolioRebalancer.Tests
     [TestFixture]
     public class PortfolioAssetTests
     {
+        [Test]
+        public void CreateFromRawData_BaseCase()
+        {
+            const string expectedName = "iShares 20+ Year Treasury Bond ETF";
+            var asset = PortfolioAsset.CreateFromRawData(expectedName, "2", "600 USD", "6617");
+            asset.Name.ShouldBe(expectedName);
+            asset.Units.ShouldBe(2);
+            asset.UnitPrice.ShouldBe(600);
+            asset.Currency.ShouldBe("USD");
+            asset.ValueDomesticCurrency.ShouldBe(6617);
+        }
 
         [TestCase("1", 1)]
         [TestCase("10", 10)]
