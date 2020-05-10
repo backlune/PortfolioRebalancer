@@ -1,6 +1,5 @@
 ﻿using PortfolioRebalancer.App.Services;
 using ReactiveUI;
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -39,7 +38,6 @@ namespace PortfolioRebalancer.App.ViewModels
         public ICommand SavePortfolioCommand { get; set; }
 
         private ObservableCollection<PortfolioAssetViewModel> assets;
-
         public ObservableCollection<PortfolioAssetViewModel> Assets
         {
             get => this.assets;

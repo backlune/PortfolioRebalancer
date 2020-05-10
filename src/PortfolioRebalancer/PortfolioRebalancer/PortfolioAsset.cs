@@ -15,6 +15,7 @@ namespace PortfolioRebalancer
         public string Tag { get; set; }
         public string Currency { get; set; }
 
+        // TODO EB (2020-04-28): This method is dependent on trading plattform
         public static PortfolioAsset CreateFromRawData(string name, string units, string unitPrice, string valueSEK)
         {
             var style = NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands;
