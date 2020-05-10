@@ -1,5 +1,10 @@
-﻿using PortfolioRebalancer.App.Services;
+﻿using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
+using PortfolioRebalancer.App.Services;
+using PortfolioRebalancer.App.Views;
 using ReactiveUI;
+using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace PortfolioRebalancer.App.ViewModels
@@ -12,7 +17,7 @@ namespace PortfolioRebalancer.App.ViewModels
         {
             this.db = db;
             Content = new PortfolioViewModel(db, "2");
-            ImportPortfolio = ReactiveCommand.Create(OnImportPortfolio);
+            ImportPortfolio = ReactiveCommand.CreateFromTask(OnImportPortfolio);
         }
 
         public string Greeting => "Welcome to PortfolioRebalancer. Start by importing your portfolio";
@@ -33,17 +38,28 @@ namespace PortfolioRebalancer.App.ViewModels
 
         public ICommand ImportPortfolio { get; set; }
 
-        private void OnImportPortfolio()
-        {
-            var item = PortfolioImportService.Import("Enter you ssn", 2); // TODO EB (2020-04-12): how to do this in an easy way? Not always 2 here!
-            Portfolio persisted = this.db.Portfolios.FindOne(x => x.Id == "2");
-            if (persisted == null)
-            {
-                this.db.Portfolios.Insert(item);
-            }
-            item.SetTagsFrom(persisted);
+        //private void OnImportPortfolio()
+        //{
+            
 
-            Content = new PortfolioViewModel(this.db, item);
+        //    //const int portfolioId = 2;
+        //    //var item = PortfolioImportService.Import("Enter you ssn", portfolioId); // TODO EB (2020-04-12): how to do this in an easy way? Not always 2 here!
+        //    //Portfolio persisted = this.db.Portfolios.FindOne(x => x.Id == portfolioId.ToString());
+        //    //if (persisted == null)
+        //    //{
+        //    //    this.db.Portfolios.Insert(item);
+        //    //}
+        //    //item.SetModifiedData(persisted);
+
+        //    //Content = new PortfolioViewModel(this.db, item);
+        //}
+        private async Task OnImportPortfolio()
+        {
+            var dialog = new ImportDialog();
+            var vm = new ImportDialogViewModel(this.db);
+            dialog.DataContext = vm;
+
+            await dialog.ShowDialog<string>((Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime).MainWindow);
         }
     }
 }

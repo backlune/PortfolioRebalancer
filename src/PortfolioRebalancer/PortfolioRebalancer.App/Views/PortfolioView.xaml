@@ -3,8 +3,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:oxy="clr-namespace:OxyPlot.Avalonia;assembly=OxyPlot.Avalonia"
+             xmlns:local="clr-namespace:PortfolioRebalancer.App.Utilities;assembly=PortfolioRebalancer.App"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="PortfolioRebalancer.App.Views.PortfolioView">
+  <UserControl.Resources>
+    <local:PercentValueConverter x:Key="PercentValueConverter" />
+  </UserControl.Resources>
+
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="0.1*" />
@@ -12,15 +17,16 @@
       <RowDefinition Height="0.6*" />
     </Grid.RowDefinitions>
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="0.5*" />
-      <ColumnDefinition Width="0.5*" />
+      <ColumnDefinition Width="0.33*" />
+      <ColumnDefinition Width="0.33*" />
+      <ColumnDefinition Width="0.33*" />
     </Grid.ColumnDefinitions>
 
-    <Button Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Content="Save" Command="{Binding SavePortfolioCommand, Mode=TwoWay}" />
-  
-    <oxy:Plot Grid.Row="1" Grid.Column="0" Title="Asset balance" Width="400" Height="300" >
+    <Button Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Content="Save" Command="{Binding SavePortfolioCommand, Mode=TwoWay}" />
+
+    <oxy:Plot Grid.Row="1" Grid.Column="0" Title="Asset balance" Width="400" Height="300" Margin="10" >
       <oxy:Plot.Series>
-        <oxy:PieSeries 
+        <oxy:PieSeries
             InnerDiameter="0.2"
             ExplodedDistance="0"
             Stroke="Black" StrokeThickness="1"
@@ -30,7 +36,7 @@
       </oxy:Plot.Series>
     </oxy:Plot>
 
-    <oxy:Plot Grid.Row="1" Grid.Column="1" Title="Tag balance" Width="400" Height="300" >
+    <oxy:Plot Grid.Row="1" Grid.Column="1" Title="Tag balance" Width="400" Height="300" Margin="10" >
       <oxy:Plot.Series>
         <oxy:PieSeries
             InnerDiameter="0.2"
@@ -41,24 +47,50 @@
             LabelField="Tag" ValueField="Value" />
       </oxy:Plot.Series>
     </oxy:Plot>
-  
-    
-    <ListBox Grid.Row="2" Grid.ColumnSpan="2" Items="{Binding Assets}" ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+    <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Vertical">
+      <StackPanel Orientation="Horizontal">
+        <TextBlock FontWeight="DemiBold" Text="Allocation set (should be 1)" Margin="5 0 5 0" />
+        <TextBlock Text="{Binding TotalGoalSet}" />
+      </StackPanel>
+
+      <oxy:Plot  Title="Tag balance" Width="400" Height="300" Margin="10" >
+        <oxy:Plot.Series>
+          <oxy:PieSeries
+              InnerDiameter="0.2"
+              ExplodedDistance="0"
+              Stroke="Black" StrokeThickness="1"
+              StartAngle="0" AngleSpan="360"
+              Items="{Binding TagGoals, Mode=TwoWay}"
+              LabelField="Tag" ValueField="Value" />
+        </oxy:Plot.Series>
+      </oxy:Plot>
+    </StackPanel>
+
+    <ListBox Grid.Row="2" Grid.ColumnSpan="3" Items="{Binding Assets}" ScrollViewer.VerticalScrollBarVisibility="Auto">
       <ListBox.ItemTemplate>
         <DataTemplate>
           <Grid>
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="60" />
+              <ColumnDefinition Width="0.1*" />
               <ColumnDefinition Width="0.3*" />
-              <ColumnDefinition Width="0.6*" />
+              <ColumnDefinition Width="0.2*" />
+              <ColumnDefinition Width="0.3*" />
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0" Margin="5 0 5 0" Text="{Binding Tag, Mode=TwoWay}" BorderBrush="LightBlue" Foreground="LightBlue" HorizontalAlignment="Left" />
-            <TextBlock Grid.Column="1" Margin="5 0 5 0" Text="{Binding Name}" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Margin="5 0 5 0" Text="{Binding ValueDomesticCurrency}" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="2" Margin="5 0 5 0" Text="{Binding Name}" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="3">
+              <TextBox Margin="5 0 5 0" Text="{Binding GoalAllocation, Mode=TwoWay, Converter={StaticResource PercentValueConverter}}" Watermark="Allocation" MinWidth="30" BorderBrush="LightBlue" Foreground="LightBlue" HorizontalAlignment="Right" />
+              <TextBox Margin="5 0 5 0" Text="{Binding GoalLeverage, Mode=TwoWay}" Watermark="Leverage (1.0 default)" MinWidth="30" BorderBrush="LightBlue" Foreground="LightBlue" HorizontalAlignment="Right" />
+            </StackPanel>
           </Grid>
         </DataTemplate>
       </ListBox.ItemTemplate>
     </ListBox>
-    
-    
+
+
   </Grid>
 </UserControl>

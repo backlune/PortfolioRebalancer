@@ -8,7 +8,8 @@ namespace PortfolioRebalancer
     {
         public string Id { get; set; }
         public List<PortfolioAsset> Assets { get; set; }
-        public void SetTagsFrom(Portfolio persisted)
+
+        public void SetModifiedData(Portfolio persisted)
         {
             foreach (var oldAsset in persisted.Assets)
             {
@@ -16,6 +17,7 @@ namespace PortfolioRebalancer
                 if(newAsset != null)
                 {
                     newAsset.Tag = oldAsset.Tag;
+                    newAsset.AllocationGoal = new AllocationGoal(oldAsset.AllocationGoal?.Allocation ?? 0, oldAsset.AllocationGoal?.Leverage ?? 1);
                 }
             }
         }
