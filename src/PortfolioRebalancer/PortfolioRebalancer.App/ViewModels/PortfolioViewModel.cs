@@ -1,12 +1,19 @@
 ﻿using PortfolioRebalancer.App.Services;
 using ReactiveUI;
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 
 namespace PortfolioRebalancer.App.ViewModels
 {
+    public class TagGoal
+    {
+        public TagGoal()
+        {
+        }
+        public string Tag { get; set; }
+        public decimal Value { get; set; }
+    }
     public class PortfolioViewModel : ViewModelBase
     {
         private Database db;
@@ -31,9 +38,19 @@ namespace PortfolioRebalancer.App.ViewModels
             foreach (var asset in Assets)
             {
                 asset.PropertyChanged += (s, e) => this.RaisePropertyChanged(nameof(AssetsByTag));
+                asset.PropertyChanged += (s, e) => this.RaisePropertyChanged(nameof(TagGoals));
+                asset.PropertyChanged += (s, e) => this.RaisePropertyChanged(nameof(TotalGoalSet));
             }
 
             SavePortfolioCommand = ReactiveCommand.Create(OnSavePortfolio);
+            Name = $"Portfolio: {item.Id}";
+        }
+
+        private string name;
+        public string Name
+        {
+            get => this.name;
+            private set => this.RaiseAndSetIfChanged(ref this.name, value);
         }
 
         public ICommand SavePortfolioCommand { get; set; }
@@ -62,6 +79,21 @@ namespace PortfolioRebalancer.App.ViewModels
                 return new ObservableCollection<TagAssetGroup>(tagGroups);
             }
         }
+
+        public ObservableCollection<TagGoal> TagGoals
+        {
+            get
+            {
+                var tagGoals = this.assets.Select(x => new { Tag = x.Tag, Value = x.GoalAllocation * x.GoalLeverage }).GroupBy(x => x.Tag).Select(x => new TagGoal
+                {
+                    Tag = x.Key,
+                    Value = x.Sum(y => y.Value)
+                });
+                return new ObservableCollection<TagGoal>(tagGoals);
+            }
+        }
+
+        public decimal TotalGoalSet => assets.Sum(x => x.GoalAllocation);
 
         private void OnSavePortfolio()
         {

@@ -8,28 +8,29 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="PortfolioRebalancer.App">
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+  <Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
 
-  <Grid>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="0.1*"/>
-      <RowDefinition Height="0.8*"/>
-      <RowDefinition Height="0.1*"/>
-    </Grid.RowDefinitions>
+  <ScrollViewer HorizontalScrollBarVisibility="Auto">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="0.1*"/>
+        <RowDefinition Height="0.8*"/>
+        <RowDefinition Height="0.1*"/>
+      </Grid.RowDefinitions>
 
-    <StackPanel Grid.Row="0" Margin="5">
-      <Button Command="{Binding ImportPortfolio}" Height="30" Width="60" HorizontalAlignment="Right">Import</Button>
-    </StackPanel>
-    
-    <StackPanel Grid.Row="1" Margin="5">
-      <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" />
-      <ContentControl Content="{Binding Content}"/>
-    </StackPanel>
-    
-    
-  </Grid>
-   
+      <StackPanel Grid.Row="0" Margin="5">
+        <Button Command="{Binding ImportPortfolio}" Height="30" Width="60" HorizontalAlignment="Right">Import</Button>
+      </StackPanel>
+
+      <StackPanel Grid.Row="1" Margin="5">
+        <TextBlock IsVisible="{Binding NoContent}" Text="{Binding Greeting}" HorizontalAlignment="Center" />
+        <ContentControl Content="{Binding Content}"/>
+      </StackPanel>
+
+
+    </Grid>
+  </ScrollViewer>
 
 </Window>

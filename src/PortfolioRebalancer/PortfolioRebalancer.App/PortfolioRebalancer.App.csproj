@@ -21,9 +21,13 @@
     <Folder Include="python_modules\" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaResource Remove="Views\ImportDialog.xaml" />
+    <AvaloniaResource Remove="Views\PortfoliosTabView.xaml" />
     <AvaloniaResource Remove="Views\PortfolioView.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Views\ImportDialog.xaml" />
+    <None Remove="Views\PortfoliosTabView.xaml" />
     <None Remove="Views\PortfolioView.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +57,16 @@
     <None Include="..\..\PortfolioFetcher\portfolioModels.py" Link="python_modules\portfolioModels.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ImportDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\PortfoliosTabView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\external\oxyplot\Source\OxyPlot.Avalonia\OxyPlot.Avalonia.csproj" />

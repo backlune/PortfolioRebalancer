@@ -1,5 +1,4 @@
 ﻿using Python.Runtime;
-using System;
 using System.Collections.Generic;
 
 namespace PortfolioRebalancer.App.Services
@@ -11,7 +10,7 @@ namespace PortfolioRebalancer.App.Services
             using (Py.GIL())
             {
                 dynamic np = Py.Import("python_modules.nordnet");
-                dynamic py_assets = np.get_assets(ssn, "2");
+                dynamic py_assets = np.get_assets(ssn, portfolioId.ToString());
 
                 var p = new Portfolio
                 {

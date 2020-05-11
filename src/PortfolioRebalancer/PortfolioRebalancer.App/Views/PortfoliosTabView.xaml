@@ -1,0 +1,22 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:PortfolioRebalancer.App.Views;assembly=PortfolioRebalancer.App"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="PortfolioRebalancer.App.Views.PortfoliosTabView">
+
+  <TabControl Grid.Row="0" Items="{Binding Portfolios}" SelectedItem="{Binding SelectedPortfolio}">
+    <TabControl.ItemTemplate>
+      <DataTemplate>
+        <TextBlock Text="{Binding Name}" />
+      </DataTemplate>
+    </TabControl.ItemTemplate>
+    <TabControl.ContentTemplate>
+      <DataTemplate>
+        <local:PortfolioView DataContext="{Binding .}" />
+      </DataTemplate>
+    </TabControl.ContentTemplate>
+  </TabControl>
+  
+</UserControl>
