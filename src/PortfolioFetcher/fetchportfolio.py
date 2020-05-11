@@ -36,7 +36,7 @@ def main(argv):
    print('found ' + str(len(assets)))
 
    for asset in assets:
-      print(asset.name + " " + asset.unitPrice + " " + asset.units + "" + asset.valueSEK)
+      print(asset.name + " " + asset.unitPrice + " " + asset.units + " " + asset.valueSEK)
 
 if __name__ == '__main__':
     main(sys.argv[1:])

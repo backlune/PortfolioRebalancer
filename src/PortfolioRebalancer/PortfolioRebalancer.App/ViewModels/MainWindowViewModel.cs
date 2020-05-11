@@ -6,6 +6,7 @@ using ReactiveUI;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Linq;
 
 namespace PortfolioRebalancer.App.ViewModels
 {
@@ -16,7 +17,10 @@ namespace PortfolioRebalancer.App.ViewModels
         public MainWindowViewModel(Database db)
         {
             this.db = db;
-            Content = new PortfolioViewModel(db, "2");
+            if (this.db.Portfolios.Count() != 0)
+            {
+                Content = new PortfoliosTabViewModel(db);
+            }
             ImportPortfolio = ReactiveCommand.CreateFromTask(OnImportPortfolio);
         }
 
@@ -53,13 +57,16 @@ namespace PortfolioRebalancer.App.ViewModels
 
         //    //Content = new PortfolioViewModel(this.db, item);
         //}
-        private async Task OnImportPortfolio()
+
+        public async Task OnImportPortfolio()
         {
             var dialog = new ImportDialog();
             var vm = new ImportDialogViewModel(this.db);
             dialog.DataContext = vm;
 
-            await dialog.ShowDialog<string>((Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime).MainWindow);
+            await dialog.ShowDialog((Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime).MainWindow);
+
+            Content = new PortfolioViewModel(db, vm.PortfolioId.ToString());
         }
     }
 }

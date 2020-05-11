@@ -41,7 +41,7 @@ def login_and_get_portfolio_page(ssn, accountNbr):
 
 
     wait = WebDriverWait(driver, 30)
-    e = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#main-content > div > div.Card__StyledCard-sc-1e5czjc-0.gJnkyb > div > div > div > div:nth-child(1) > div > h1")))
+    e = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#main-content > div > div.Card__StyledCard-sc-1e5czjc-0.jKXOka > div > div > div > div:nth-child(1) > div > h1")))
     assert "Depåöversikt" in e.text
 
     page_source = driver.page_source;
@@ -69,5 +69,8 @@ def parse_portfolio(page):
         unitPrice = fund.select_one('td:nth-of-type(8)').select_one('div.c02264')
         valueSEK = fund.select_one('td:nth-of-type(12)').select_one('div.c02264')
         assets.append(Asset(name.attrs['title'], units.text, unitPrice.text, unicodedata.normalize('NFKC', valueSEK.text)))
-        
+
+    nonTraded = soup.select('.VisuallyHidden__Hidden-sc-1mwv7fg-0.goWc')[1]; 
+    assets.append(Asset('Balance', "1", nonTraded.text, unicodedata.normalize('NFKC', nonTraded.text)));
+
     return assets

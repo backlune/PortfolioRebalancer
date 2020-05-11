@@ -43,11 +43,20 @@ namespace PortfolioRebalancer.App.ViewModels
             }
 
             SavePortfolioCommand = ReactiveCommand.Create(OnSavePortfolio);
+            Name = $"Portfolio: {item.Id}";
+        }
+
+        private string name;
+        public string Name
+        {
+            get => this.name;
+            private set => this.RaiseAndSetIfChanged(ref this.name, value);
         }
 
         public ICommand SavePortfolioCommand { get; set; }
 
         private ObservableCollection<PortfolioAssetViewModel> assets;
+
         public ObservableCollection<PortfolioAssetViewModel> Assets
         {
             get => this.assets;
